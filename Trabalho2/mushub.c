@@ -49,7 +49,11 @@ int main(void)
 		Eventos = remover(Eventos); //processar um evento
 
 
-		if(tipo_evento==1){//se evento e de entrada
+		switch(tipo_evento){
+
+			case 1://se evento e de entrada
+			
+
 			Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));
 				if(canal < num_canais){    //se houver canais livres
 					chamadas_do_canal[canal]++;
@@ -65,28 +69,29 @@ int main(void)
 				num_chamadas_atrasadas++;
 
 				}
-		}
+			break;
 
-		else if(tipo_evento == 0) {// se evento e saida
+			case 0:// se evento e saida
 			
-			canal--; //liberta o canal e volta ao anterior
-			if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
-				atraso = tempo_evento -Fila->tempo;
-				atraso_total = atraso_total + atraso;
-				Fila = remover(Fila);
+				canal--; //liberta o canal e volta ao anterior
+				if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
+					atraso = tempo_evento -Fila->tempo;
+					atraso_total = atraso_total + atraso;
+					Fila = remover(Fila);
 
 
 
 
-				Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
+					Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
 				
-				chamadas_do_canal[canal]++; 
-				canal++;
+					chamadas_do_canal[canal]++; 
+					canal++;
 
 
 				//timoteo, o gajo aqui faz umas merdas com indexes para
 				// o histograma, ve isso pf
 			}
+			break;
 		}
 	}
 
