@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -6,34 +5,24 @@
 
 #include "ajuda_mushu.h"
 
-int arrivals = 0;
-
-
 
 // Pequeno exemplo de utilização
 int main(void)
 {
 
 	double tempo_simulacao = 0;
-<<<<<<< HEAD
 	double tempo_evento = 0, tempo_atual = 0;
-	double atraso = 0.0, atraso_total = 0.0, max_atraso= 0.0, min_atraso=999.0;
+	double atraso = 0.0, atraso_total = 0.0;
 	int tipo_evento, num_canais = 0;
 	int num_chamadas = 0;
 	int num_chamadas_atrasadas = 0;
 	lista *Eventos = NULL;
 
 	lista *Fila = NULL;//agora temos fila
-=======
-	double tempo_evento, tempo_atual = 0;
-	double atraso, atraso_total= 0;
-	int tipo_evento, num_canais, num_chamadas, num_chamadas_atrasadas= 0;
-	lista *Eventos = NULL, 
-	*Fila = NULL;//agora temos fila
->>>>>>> parent of 37eb51b... waiting time corrigido
 	int canal=0; 
+
 	int index, histograma[HIST_SIZE] = {0};
-	int N = 1, n_channels_free = 0;
+	
 
 	srand(time(NULL));
 	printf(">>Qual o tempo de execucao em segundos? \n\n");
@@ -84,23 +73,6 @@ int main(void)
 
 			case 0:// se evento e saida
 			
-			canal--; //liberta o canal e volta ao anterior
-			if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
-<<<<<<< HEAD
-				atraso = tempo_evento -Fila->tempo;
-
-				if (min_atraso>atraso)
-					min_atraso=atraso;
-
-				if (max_atraso<atraso)
-					max_atraso=atraso;
-
-				atraso_total = atraso_total + atraso;
-=======
-				atraso = tempo_evento - Fila->tempo;
-				atraso_total += atraso;
->>>>>>> parent of 37eb51b... waiting time corrigido
-				Fila = remover(Fila);
 				canal--; //liberta o canal e volta ao anterior
 				if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
 					atraso = tempo_evento -Fila->tempo;
@@ -110,23 +82,14 @@ int main(void)
 
 
 
-<<<<<<< HEAD
 					Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
 				
 					chamadas_do_canal[canal]++; 
 					canal++;
-=======
-				Eventos = adicionar(Eventos, 0, (calculaD() + tipo_evento));
-				canal++;
-				chamadas_do_canal[canal - 1]++; 
->>>>>>> parent of 37eb51b... waiting time corrigido
 
 
 				//timoteo, o gajo aqui faz umas merdas com indexes para
 				// o histograma, ve isso pf
-				index = map(atraso);
-				// printf("%lf -> %d  \n", atraso,index);
-				histograma[index]++;
 			}
 			break;
 		}
@@ -134,33 +97,30 @@ int main(void)
 
 
 
-		printf("Max_atraso: %lf || Min_atraso: %lf || \n", max_atraso, min_atraso)
 
-<<<<<<< HEAD
+
+		printf("\n");
 		printf(">>Atraso total:%lf\n\n", atraso_total);
 		printf(">>Chamadas atrasadas:%d\n\n",num_chamadas_atrasadas );
 		printf(">>Numero total de chamadas:%d\n\n",num_chamadas );
 		printf(">>Probabilidade de atraso:%f.2\n\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
 		printf(">>Atraso Medio: %.2f\n\n",((float)atraso_total/num_chamadas));
-=======
-
-
-		
-		printf("Probabilidade de atraso:%f.2\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
-		printf("Atraso Medio: %f.2\n",((float)atraso_total/num_chamadas));
->>>>>>> parent of 37eb51b... waiting time corrigido
 		//index = hardenMap(c_atual);
 
+		//histograma[index]++;
+		// lista_eventos = adicionar(lista_eventos, 0,c_atual);
+	
 
 	//tempo_espera = tempo_espera/arrivals;
 	//printf("Total de chegadas: %d\n",arrivals);
 	//printf("Tempo médio de espera: %lf \n",tempo_espera);
 	// printf("Maximo de index %d  | Minimo de c: %lf | Max de c: %lf \n", max_ind,min_c,max_c);
 	// printf("Minimo de u: %lf | Max de u: %lf \n", max_u,min_u);
-	imprimeHistograma(histograma);
-	guardarCSV(histograma);
+	//imprimeHistograma(histograma);
+	//guardarCSV(histograma);
 
-	system("python histograma.py");
+	//system("python histograma.py");
 
 	// limpar(arrivals);
 }
+
