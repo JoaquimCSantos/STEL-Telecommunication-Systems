@@ -96,7 +96,7 @@ int main(void)
 
 		
 		printf("Probabilidade de atraso:%f.2\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
-		printf("Atraso Medio: %f.2\n",((float)atraso_total, num_chamadas));
+		printf("Atraso Medio: %f.2\n",((float)atraso_total/num_chamadas));
 		//index = hardenMap(c_atual);
 
 		//histograma[index]++;
