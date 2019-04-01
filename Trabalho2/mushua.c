@@ -48,12 +48,13 @@ int main(void)
 
 
 		if(tipo_evento==1){
-		Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));
+
+		Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));//chegada do proximo
 			if(canal < num_canais){    //se houver canais livres
 				chamadas_do_canal[canal]++;
 				num_chamadas++;
 				canal++;
-				Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
+				Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));//partida deste
 			}
 
 			else { //se os canais tiverem ocupados rejeita a chamada
