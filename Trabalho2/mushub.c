@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -6,23 +5,24 @@
 
 #include "ajuda_mushu.h"
 
-int arrivals = 0;
-
-
 
 // Pequeno exemplo de utilização
 int main(void)
 {
 
 	double tempo_simulacao = 0;
-	double tempo_evento, tempo_atual = 0;
-	double atraso, atraso_total= 0;
-	int tipo_evento, num_canais, num_chamadas, num_chamadas_atrasadas= 0;
-	lista *Eventos = NULL, 
-	*Fila = NULL;//agora temos fila
+	double tempo_evento = 0, tempo_atual = 0;
+	double atraso = 0.0, atraso_total = 0.0;
+	int tipo_evento, num_canais = 0;
+	int num_chamadas = 0;
+	int num_chamadas_atrasadas = 0;
+	lista *Eventos = NULL;
+
+	lista *Fila = NULL;//agora temos fila
 	int canal=0; 
+
 	int index, histograma[HIST_SIZE] = {0};
-	int N = 1, n_channels_free = 0;
+	
 
 	srand(time(NULL));
 	printf("Qual o tempo de execucao em segundos? \n");
@@ -71,16 +71,17 @@ int main(void)
 			
 			canal--; //liberta o canal e volta ao anterior
 			if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
-				atraso = tempo_evento - Fila->tempo;
-				atraso_total += atraso;
+				atraso = tempo_evento -Fila->tempo;
+				atraso_total = atraso_total + atraso;
 				Fila = remover(Fila);
 
 
 
 
-				Eventos = adicionar(Eventos, 0, (calculaD() + tipo_evento));
+				Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
+				
+				chamadas_do_canal[canal]++; 
 				canal++;
-				chamadas_do_canal[canal - 1]++; 
 
 
 				//timoteo, o gajo aqui faz umas merdas com indexes para
@@ -94,7 +95,9 @@ int main(void)
 
 
 
-		
+		printf("%lf\n", atraso_total);
+		printf("%d\n",num_chamadas_atrasadas );
+		printf("%d\n",num_chamadas );
 		printf("Probabilidade de atraso:%f.2\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
 		printf("Atraso Medio: %f.2\n",((float)atraso_total/num_chamadas));
 		//index = hardenMap(c_atual);
