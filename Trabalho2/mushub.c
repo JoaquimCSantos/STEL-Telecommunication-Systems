@@ -35,7 +35,7 @@ int main(void)
 		chamadas_do_canal[i]=0;
 	}
 
-	lista = adicionar(Eventos, 1, getC());
+	Eventos = adicionar(Eventos, 1, calculaC());
 
 
 
@@ -48,12 +48,12 @@ int main(void)
 
 
 		if(tipo_evento==1){//se evento e de entrada
-			Eventos=adicionar(Eventos, 1, (getC()+tempo_evento));
+			Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));
 				if(canal < num_canais){    //se houver canais livres
 					chamadas_do_canal[canal]++;
 					num_chamadas++;
 					canal++;
-					Eventos = adicionar(Eventos, 0, (getD() + tempo_evento))
+					Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
 				}
 
 				else { //se os canais tiverem ocupados rejeita a chamada
@@ -76,7 +76,7 @@ int main(void)
 
 
 
-				Eventos = adicionar(Eventos, 0, (getD() + tipo_evento));
+				Eventos = adicionar(Eventos, 0, (calculaD() + tipo_evento));
 				canal++;
 				chamadas_do_canal[canal - 1]++; 
 

@@ -2,21 +2,6 @@
 
 
 
-// Função que imprime no ecra todos os elementos da lista
-void imprimir (lista * apontador)
-{
-	if(apontador == NULL)
-		printf("Lista vazia!\n");
-	else
-	{
-		while(apontador != NULL)
-		{
-			printf("Tipo=%d\tTempo=%lf\n", apontador -> tipo, apontador -> tempo);
-			apontador = (lista *)apontador -> proximo;
-		}
-	}
-}
-
 void guardarCSV(int histograma[]) {
 	FILE *f;
 	f = fopen("histograma.csv", "w");

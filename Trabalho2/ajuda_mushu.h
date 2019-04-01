@@ -13,9 +13,6 @@
 
 lista  * lista_eventos;
 
-void imprimir (lista * apontador);
-
-
 void guardarCSV(int histograma[]);
 
 double calculaC();

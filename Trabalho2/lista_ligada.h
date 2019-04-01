@@ -16,3 +16,5 @@ typedef struct{
 lista * remover (lista * apontador);
 
 lista * adicionar (lista * apontador, int n_tipo, double n_tempo);
+
+void imprimir (lista * apontador);

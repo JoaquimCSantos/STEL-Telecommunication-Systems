@@ -53,3 +53,17 @@ lista * adicionar (lista * apontador, int n_tipo, double n_tempo)
 		return lap;
 	}
 }
+
+void imprimir (lista * apontador)
+{
+	if(apontador == NULL)
+		printf("Lista vazia!\n");
+	else
+	{
+		while(apontador != NULL)
+		{
+			printf("Tipo=%d\tTempo=%lf\n", apontador -> tipo, apontador -> tempo);
+			apontador = (lista *)apontador -> proximo;
+		}
+	}
+}

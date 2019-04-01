@@ -69,7 +69,7 @@ int main(void)
 
 
 
-
+	imprimir(Eventos);
 	printf("%d\n", num_chamadas_perdidas);
 	printf("%d\n",num_chamadas);
 	printf("Probabilidade de bloqueio:%f.2\n", ((float)num_chamadas_perdidas/num_chamadas) * 100);
