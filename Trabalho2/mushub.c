@@ -12,7 +12,7 @@ int main(void)
 
 	double tempo_simulacao = 0;
 	double tempo_evento = 0, tempo_atual = 0;
-	double atraso = 0.0, atraso_total = 0.0;
+	double atraso = 0.0, atraso_total = 0.0, max_atraso = 0.0 ,  min_atraso = 999.0 ;
 	int tipo_evento, num_canais = 0;
 	int num_chamadas = 0;
 	int num_chamadas_atrasadas = 0;
@@ -87,9 +87,14 @@ int main(void)
 					chamadas_do_canal[canal]++; 
 					canal++;
 
+					if (max_atraso < atraso)
+						max_atraso = atraso;
 
-				//timoteo, o gajo aqui faz umas merdas com indexes para
-				// o histograma, ve isso pf
+					if (min_atraso > atraso)
+						min_atraso = atraso;					
+
+					index = map(atraso);
+					histograma[index]++;
 			}
 			break;
 		}
@@ -98,29 +103,19 @@ int main(void)
 
 
 
-
+		printf(">>Max_atraso:%lf  || Min_atraso: %lf  \n\n", max_atraso,min_atraso);
 		printf("\n");
 		printf(">>Atraso total:%lf\n\n", atraso_total);
 		printf(">>Chamadas atrasadas:%d\n\n",num_chamadas_atrasadas );
 		printf(">>Numero total de chamadas:%d\n\n",num_chamadas );
 		printf(">>Probabilidade de atraso:%f.2\n\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
 		printf(">>Atraso Medio: %.2f\n\n",((float)atraso_total/num_chamadas));
-		//index = hardenMap(c_atual);
 
-		//histograma[index]++;
-		// lista_eventos = adicionar(lista_eventos, 0,c_atual);
-	
+		//imprimeHistograma(histograma);
+		guardarCSV(histograma);
 
-	//tempo_espera = tempo_espera/arrivals;
-	//printf("Total de chegadas: %d\n",arrivals);
-	//printf("Tempo médio de espera: %lf \n",tempo_espera);
-	// printf("Maximo de index %d  | Minimo de c: %lf | Max de c: %lf \n", max_ind,min_c,max_c);
-	// printf("Minimo de u: %lf | Max de u: %lf \n", max_u,min_u);
-	//imprimeHistograma(histograma);
-	//guardarCSV(histograma);
+		system("python histograma.py");
 
-	//system("python histograma.py");
-
-	// limpar(arrivals);
+		// limpar(arrivals);
 }
 
