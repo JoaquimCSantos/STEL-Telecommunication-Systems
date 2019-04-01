@@ -79,7 +79,6 @@ int main(void)
 							//caso a fila esteja cheia
 							//descarta a chamada
 							num_chamadas_perdidas++;
-							num_chamadas++;
 						}
 
 					}
@@ -120,7 +119,6 @@ int main(void)
 	printf("\n");
 	printf(">>Probabilidade de atraso:%.2f\n\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
 	printf(">>Atraso Medio: %.2f\n\n",((float)atraso_total/num_chamadas));
-	printf(">>Probabilidade de bloqueio:%.2f\n\n", ((float)num_chamadas_perdidas/num_chamadas) * 100);
 		//index = hardenMap(c_atual);
 
 		//histograma[index]++;
