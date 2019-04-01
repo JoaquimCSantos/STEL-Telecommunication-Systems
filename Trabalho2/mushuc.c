@@ -30,11 +30,11 @@ int main(void)
 	
 
 	srand(time(NULL));
-	printf("Qual o tempo de execucao em segundos? \n");
+	printf(">>Qual o tempo de execucao em segundos? \n\n");
 	scanf("%lf", &tempo_simulacao);
-	printf("Qual o numero de canais? \n");
+	printf(">>Qual o numero de canais? \n\n");
 	scanf("%d", &num_canais);
-	printf("Qual o tamanho da fila? \n");
+	printf(">>Qual o tamanho da fila? \n\n");
 	scanf("%d", &tamanho_fila);
 
 	//Array com todos os canais 
@@ -79,6 +79,7 @@ int main(void)
 							//caso a fila esteja cheia
 							//descarta a chamada
 							num_chamadas_perdidas++;
+							num_chamadas++;
 						}
 
 					}
@@ -116,9 +117,10 @@ int main(void)
 
 
 
-		
-	printf("Probabilidade de atraso:%f.2\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
-	printf("Atraso Medio: %f.2\n",((float)atraso_total/num_chamadas));
+	printf("\n");
+	printf(">>Probabilidade de atraso:%.2f\n\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
+	printf(">>Atraso Medio: %.2f\n\n",((float)atraso_total/num_chamadas));
+	printf(">>Probabilidade de bloqueio:%.2f\n\n", ((float)num_chamadas_perdidas/num_chamadas) * 100);
 		//index = hardenMap(c_atual);
 
 		//histograma[index]++;

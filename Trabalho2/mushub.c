@@ -25,9 +25,9 @@ int main(void)
 	
 
 	srand(time(NULL));
-	printf("Qual o tempo de execucao em segundos? \n");
+	printf(">>Qual o tempo de execucao em segundos? \n\n");
 	scanf("%lf", &tempo_simulacao);
-	printf("Qual o numero de canais? \n");
+	printf(">>Qual o numero de canais? \n\n");
 	scanf("%d", &num_canais);
 
 	//Array com todos os canais 
@@ -49,7 +49,11 @@ int main(void)
 		Eventos = remover(Eventos); //processar um evento
 
 
-		if(tipo_evento==1){//se evento e de entrada
+		switch(tipo_evento){
+
+			case 1://se evento e de entrada
+			
+
 			Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));
 				if(canal < num_canais){    //se houver canais livres
 					chamadas_do_canal[canal]++;
@@ -65,9 +69,9 @@ int main(void)
 				num_chamadas_atrasadas++;
 
 				}
-		}
+			break;
 
-		else if(tipo_evento == 0) {// se evento e saida
+			case 0:// se evento e saida
 			
 			canal--; //liberta o canal e volta ao anterior
 			if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
@@ -81,14 +85,19 @@ int main(void)
 
 				atraso_total = atraso_total + atraso;
 				Fila = remover(Fila);
+				canal--; //liberta o canal e volta ao anterior
+				if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
+					atraso = tempo_evento -Fila->tempo;
+					atraso_total = atraso_total + atraso;
+					Fila = remover(Fila);
 
 
 
 
-				Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
+					Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
 				
-				chamadas_do_canal[canal]++; 
-				canal++;
+					chamadas_do_canal[canal]++; 
+					canal++;
 
 
 				//timoteo, o gajo aqui faz umas merdas com indexes para
@@ -97,19 +106,20 @@ int main(void)
 				// printf("%lf -> %d  \n", atraso,index);
 				histograma[index]++;
 			}
+			break;
 		}
 	}
 
 
 
-		printf("Max_atraso: %lf || Min_atraso: %lf || \n", max_atraso, min_atraso);
+		printf("Max_atraso: %lf || Min_atraso: %lf || \n", max_atraso, min_atraso)
 
-
-		printf("%lf\n", atraso_total);
-		printf("%d\n",num_chamadas_atrasadas );
-		printf("%d\n",num_chamadas );
-		printf("Probabilidade de atraso:%f.2\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
-		printf("Atraso Medio: %f.2\n",((float)atraso_total/num_chamadas));
+		printf(">>Atraso total:%lf\n\n", atraso_total);
+		printf(">>Chamadas atrasadas:%d\n\n",num_chamadas_atrasadas );
+		printf(">>Numero total de chamadas:%d\n\n",num_chamadas );
+		printf(">>Probabilidade de atraso:%f.2\n\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
+		printf(">>Atraso Medio: %.2f\n\n",((float)atraso_total/num_chamadas));
+		//index = hardenMap(c_atual);
 
 
 	//tempo_espera = tempo_espera/arrivals;
