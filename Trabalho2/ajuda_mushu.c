@@ -1,7 +1,5 @@
 #include "ajuda_mushu.h"
 
-
-
 void guardarCSV(int histograma[]) {
 	FILE *f;
 	f = fopen("histograma.csv", "w");
@@ -29,9 +27,12 @@ double calculaD(){
 	return -Dm * log(u);
 }
 
-// Funcao que permite mapear os valores c entrada vem entre ]0,1[ e saida [0 HIST_SIZE]
+// Funcao que permite mapear os valores c entrada vem entre ]0,MAX_ATRASO[ e saida [0 HIST_SIZE]
 int map(double c_to_map){
-	 return (int)round( 0 + ((HIST_SIZE - 0) / (1 - 0)) * (c_to_map - 0));
+
+	printf("%lf -> %d \n", c_to_map,(int)floor(0 + ((HIST_SIZE - 0) / (MAX_ATRASO - 0)) * (c_to_map - 0)));
+
+	return (int)floor( 0 + ((HIST_SIZE - 0) / (MAX_ATRASO - 0)) * (c_to_map - 0));
 }
 int hardenMap(double c_to_map){
 

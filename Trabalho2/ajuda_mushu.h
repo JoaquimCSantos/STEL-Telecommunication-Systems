@@ -7,6 +7,7 @@
 #include "lista_ligada.h"
 
 #define HIST_SIZE 25
+#define MAX_ATRASO 450.0
 #define LAMBDA 200
 #define DELTA 2.0/(LAMBDA*5)
 #define Dm 0.08
