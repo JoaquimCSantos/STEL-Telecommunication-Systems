@@ -25,11 +25,10 @@ int main(void)
 		
 
 	srand(time(NULL));
-	printf(">>Qual o tempo de execucao em segundos? \n\n");
+	printf("Qual o tempo de execucao em segundos? \n");
 	scanf("%lf", &tempo_simulacao);
-	printf(">>Qual o numero de canais? \n\n");
+	printf("Qual o numero de canais? \n");
 	scanf("%d", &num_canais);
-	printf("\n");
 
 	//Array com todos os canais 
 	int chamadas_do_canal[num_canais];
@@ -48,34 +47,32 @@ int main(void)
 		Eventos = remover(Eventos); //processar um evento
 
 
-		switch(tipo_evento){
-		case 1:
-			Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));
-				if(canal < num_canais){    //se houver canais livres
-					chamadas_do_canal[canal]++;
-					num_chamadas++;
-					canal++;
-					Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
-				}
+		if(tipo_evento==1){
+		Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));
+			if(canal < num_canais){    //se houver canais livres
+				chamadas_do_canal[canal]++;
+				num_chamadas++;
+				canal++;
+				Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
+			}
 
-				else { //se os canais tiverem ocupados rejeita a chamada
-					num_chamadas++;
-					num_chamadas_perdidas++;
-				}
-			break;
+			else { //se os canais tiverem ocupados rejeita a chamada
+				num_chamadas++;
+				num_chamadas_perdidas++;
+			}
+		}
 
-		case 0: 
+		else if(tipo_evento == 0) {
 			canal--; //liberta o canal e volta ao anterior
-		break;
 		}
 	}
 
 
 
 
-	printf(">>Numero de chamadas perdidas: %d\n\n", num_chamadas_perdidas);
-	printf(">>Numero total de chamadas:%d\n\n",num_chamadas);
-	printf(">>Probabilidade de bloqueio:%.2f\n\n", ((float)num_chamadas_perdidas/num_chamadas) * 100);
+	printf("%d\n", num_chamadas_perdidas);
+	printf("%d\n",num_chamadas);
+	printf("Probabilidade de bloqueio:%f.2\n", ((float)num_chamadas_perdidas/num_chamadas) * 100);
 	// index = hardenMap(c_atual);
 	// histograma[index]++;
 	// lista_eventos = adicionar(lista_eventos, 0,c_atual);
