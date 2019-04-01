@@ -37,7 +37,7 @@ int main(void)
 		chamadas_do_canal[i]=0;
 	}
 
-	Eventos = adicionar(Eventos, 1, calculaC());
+	Eventos = adicionar(Eventos, CHEGADA_EVENTO, calculaC());
 
 
 
@@ -51,19 +51,19 @@ int main(void)
 
 		switch(tipo_evento){
 
-			case 1://se evento e de entrada
+			case CHEGADA_EVENTO://se evento e de entrada
 			
 
-			Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));
+			Eventos=adicionar(Eventos, CHEGADA_EVENTO, (calculaC()+tempo_evento));
 				if(canal < num_canais){    //se houver canais livres
 					chamadas_do_canal[canal]++;
 					num_chamadas++;
 					canal++;
-					Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
+					Eventos = adicionar(Eventos, SAIDA_EVENTO, (calculaD() + tempo_evento));
 				}
 
 				else { //se os canais tiverem ocupados rejeita a chamada
-				Fila = adicionar(Fila, 1, tempo_evento);
+				Fila = adicionar(Fila, CHEGADA_EVENTO, tempo_evento);
 				//em vez de descartar, poe na fila
 				num_chamadas++;
 				num_chamadas_atrasadas++;
@@ -71,7 +71,7 @@ int main(void)
 				}
 			break;
 
-			case 0:// se evento e saida
+			case SAIDA_EVENTO:// se evento e saida
 			
 				canal--; //liberta o canal e volta ao anterior
 				if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
@@ -82,7 +82,7 @@ int main(void)
 
 
 
-					Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
+					Eventos = adicionar(Eventos, SAIDA_EVENTO, (calculaD() + tempo_evento));
 				
 					chamadas_do_canal[canal]++; 
 					canal++;

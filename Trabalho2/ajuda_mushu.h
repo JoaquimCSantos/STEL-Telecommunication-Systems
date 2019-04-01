@@ -12,6 +12,8 @@
 #define DELTA 2.0/(LAMBDA*5)
 #define Dm 0.08
 
+#define CHEGADA_EVENTO 1
+#define SAIDA_EVENTO 0
 lista  * lista_eventos;
 
 void guardarCSV(int histograma[]);
