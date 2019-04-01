@@ -14,7 +14,9 @@ int arrivals = 0;
 int main(void)
 {
 
-	double tempo_simulacao, tempo_evento, tempo_atual = 0;
+	double tempo_simulacao = 0;
+	double tempo_evento, tempo_atual = 0;
+	double atraso, atraso_total= 0;
 	int tipo_evento, num_canais, num_chamadas, num_chamadas_atrasadas= 0;
 	lista *Eventos = NULL, 
 	*Fila = NULL;//agora temos fila
@@ -94,22 +96,22 @@ int main(void)
 
 		
 		printf("Probabilidade de atraso:%f.2\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
-		printf("Atraso Medio: %f.2\n",((float)atraso_total, num_chamadas);
-		index = hardenMap(c_atual);
+		printf("Atraso Medio: %f.2\n",((float)atraso_total, num_chamadas));
+		//index = hardenMap(c_atual);
 
-		histograma[index]++;
+		//histograma[index]++;
 		// lista_eventos = adicionar(lista_eventos, 0,c_atual);
 	
 
-	tempo_espera = tempo_espera/arrivals;
-	printf("Total de chegadas: %d\n",arrivals);
-	printf("Tempo médio de espera: %lf \n",tempo_espera);
+	//tempo_espera = tempo_espera/arrivals;
+	//printf("Total de chegadas: %d\n",arrivals);
+	//printf("Tempo médio de espera: %lf \n",tempo_espera);
 	// printf("Maximo de index %d  | Minimo de c: %lf | Max de c: %lf \n", max_ind,min_c,max_c);
 	// printf("Minimo de u: %lf | Max de u: %lf \n", max_u,min_u);
-	imprimeHistograma(histograma);
-	guardarCSV(histograma);
+	//imprimeHistograma(histograma);
+	//guardarCSV(histograma);
 
-	system("python histograma.py");
+	//system("python histograma.py");
 
 	// limpar(arrivals);
 }
