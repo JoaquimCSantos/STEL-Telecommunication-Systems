@@ -48,13 +48,12 @@ int main(void)
 
 
 		if(tipo_evento==1){
-
-		Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));//chegada do proximo
+		Eventos=adicionar(Eventos, 1, (calculaC()+tempo_evento));
 			if(canal < num_canais){    //se houver canais livres
 				chamadas_do_canal[canal]++;
 				num_chamadas++;
 				canal++;
-				Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));//partida deste
+				Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
 			}
 
 			else { //se os canais tiverem ocupados rejeita a chamada
@@ -70,7 +69,7 @@ int main(void)
 
 
 
-	imprimir(Eventos);
+
 	printf("%d\n", num_chamadas_perdidas);
 	printf("%d\n",num_chamadas);
 	printf("Probabilidade de bloqueio:%f.2\n", ((float)num_chamadas_perdidas/num_chamadas) * 100);
