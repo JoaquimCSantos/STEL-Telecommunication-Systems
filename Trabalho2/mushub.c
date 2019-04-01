@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -5,12 +6,16 @@
 
 #include "ajuda_mushu.h"
 
+int arrivals = 0;
+
+
 
 // Pequeno exemplo de utilização
 int main(void)
 {
 
 	double tempo_simulacao = 0;
+<<<<<<< HEAD
 	double tempo_evento = 0, tempo_atual = 0;
 	double atraso = 0.0, atraso_total = 0.0, max_atraso= 0.0, min_atraso=999.0;
 	int tipo_evento, num_canais = 0;
@@ -19,10 +24,16 @@ int main(void)
 	lista *Eventos = NULL;
 
 	lista *Fila = NULL;//agora temos fila
+=======
+	double tempo_evento, tempo_atual = 0;
+	double atraso, atraso_total= 0;
+	int tipo_evento, num_canais, num_chamadas, num_chamadas_atrasadas= 0;
+	lista *Eventos = NULL, 
+	*Fila = NULL;//agora temos fila
+>>>>>>> parent of 37eb51b... waiting time corrigido
 	int canal=0; 
-
 	int index, histograma[HIST_SIZE] = {0};
-	
+	int N = 1, n_channels_free = 0;
 
 	srand(time(NULL));
 	printf(">>Qual o tempo de execucao em segundos? \n\n");
@@ -75,6 +86,7 @@ int main(void)
 			
 			canal--; //liberta o canal e volta ao anterior
 			if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
+<<<<<<< HEAD
 				atraso = tempo_evento -Fila->tempo;
 
 				if (min_atraso>atraso)
@@ -84,6 +96,10 @@ int main(void)
 					max_atraso=atraso;
 
 				atraso_total = atraso_total + atraso;
+=======
+				atraso = tempo_evento - Fila->tempo;
+				atraso_total += atraso;
+>>>>>>> parent of 37eb51b... waiting time corrigido
 				Fila = remover(Fila);
 				canal--; //liberta o canal e volta ao anterior
 				if (Fila != NULL){      //tira da fila e poe no canal quando canal ta livre
@@ -94,10 +110,16 @@ int main(void)
 
 
 
+<<<<<<< HEAD
 					Eventos = adicionar(Eventos, 0, (calculaD() + tempo_evento));
 				
 					chamadas_do_canal[canal]++; 
 					canal++;
+=======
+				Eventos = adicionar(Eventos, 0, (calculaD() + tipo_evento));
+				canal++;
+				chamadas_do_canal[canal - 1]++; 
+>>>>>>> parent of 37eb51b... waiting time corrigido
 
 
 				//timoteo, o gajo aqui faz umas merdas com indexes para
@@ -114,11 +136,19 @@ int main(void)
 
 		printf("Max_atraso: %lf || Min_atraso: %lf || \n", max_atraso, min_atraso)
 
+<<<<<<< HEAD
 		printf(">>Atraso total:%lf\n\n", atraso_total);
 		printf(">>Chamadas atrasadas:%d\n\n",num_chamadas_atrasadas );
 		printf(">>Numero total de chamadas:%d\n\n",num_chamadas );
 		printf(">>Probabilidade de atraso:%f.2\n\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
 		printf(">>Atraso Medio: %.2f\n\n",((float)atraso_total/num_chamadas));
+=======
+
+
+		
+		printf("Probabilidade de atraso:%f.2\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
+		printf("Atraso Medio: %f.2\n",((float)atraso_total/num_chamadas));
+>>>>>>> parent of 37eb51b... waiting time corrigido
 		//index = hardenMap(c_atual);
 
 
