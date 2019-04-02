@@ -17,9 +17,9 @@ int main(void)
 	int num_chamadas = 0;
 	int num_chamadas_atrasadas = 0;
 	lista *Eventos = NULL;
-
+	double atraso_min;
 	lista *Fila = NULL;//agora temos fila
-	int canal=0; 
+	int canal=0, contador_atraso=0; 
 
 	int index, histograma[HIST_SIZE] = {0};
 	
@@ -29,6 +29,8 @@ int main(void)
 	scanf("%lf", &tempo_simulacao);
 	printf(">>Qual o numero de canais? \n\n");
 	scanf("%d", &num_canais);
+
+
 
 	switch(num_canais){
 		case 2:
@@ -43,7 +45,9 @@ int main(void)
 		default:
 			max_atraso_map = MAX_ATRASO_5;
 			break;
-	}									
+	}	
+	printf(">>Qual o atraso minimo [0,%.2f]?\n",max_atraso_map );
+	scanf("%lf", &atraso_min);								
 
 	//Array com todos os canais 
 	int chamadas_do_canal[num_canais];
@@ -106,6 +110,9 @@ int main(void)
 					if (min_atraso > atraso)
 						min_atraso = atraso;					
 
+					//Estimador probabilidade maior
+					if (atraso_min< atraso)
+						contador_atraso++;
 					//Tentar Guardar todos os valores num array para depois fazer o map, no entanto muito comprido 70k
 					// *(valores_atraso + posicao_atraso) = atraso;
 					// posicao_atraso++;
@@ -128,7 +135,9 @@ int main(void)
 		printf(">>Chamadas atrasadas:%d\n\n",num_chamadas_atrasadas );
 		printf(">>Numero total de chamadas:%d\n\n",num_chamadas );
 		printf(">>Probabilidade de atraso:%f.2\n\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
-		printf(">>Atraso Medio: %.2f\n\n",((float)atraso_total/num_chamadas));
+		printf(">>Atraso Medio: %f\n\n",((float)atraso_total/num_chamadas));
+		printf(">>Probabilidade de atraso > %.2f: %.2f %% \n\n", atraso_min,((float)contador_atraso/num_chamadas) * 100);
+
 
 		//imprimeHistograma(histograma);
 		guardarCSV(histograma);
