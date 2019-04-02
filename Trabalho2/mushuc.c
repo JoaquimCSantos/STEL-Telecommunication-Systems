@@ -68,6 +68,7 @@ int main(void)
 
 						 //se os canais tiverem ocupados e houver
 						 // espaco na fila
+
 						if(indice_fila < tamanho_fila){
 						Fila = adicionar(Fila, 1, tempo_evento);
 							//em vez de descartar, poe na fila
@@ -78,6 +79,7 @@ int main(void)
 						else {
 							//caso a fila esteja cheia
 							//descarta a chamada
+							num_chamadas++;
 							num_chamadas_perdidas++;
 						}
 
@@ -103,9 +105,6 @@ int main(void)
 
 					//tira fa fila
 					indice_fila--;
-
-					//tirmoteo, o gajo aqui faz umas merdas com indexes para
-					// o histograma, ve isso pf
 				}
 			break;
 		}
@@ -119,6 +118,7 @@ int main(void)
 	printf("\n");
 	printf(">>Probabilidade de atraso:%.2f\n\n", ((float)num_chamadas_atrasadas/num_chamadas) * 100);
 	printf(">>Atraso Medio: %.2f\n\n",((float)atraso_total/num_chamadas));
+	printf(">>Probabilidade Descartar: %.2f\n\n",((float)num_chamadas_perdidas/num_chamadas)*100);	
 		//index = hardenMap(c_atual);
 
 		//histograma[index]++;
