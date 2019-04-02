@@ -20,7 +20,7 @@ double calculaC(){
 	return -(1.0 / LAMBDA) * log(u);
 }
 
-// Funcao que permite calcular o c
+// Funcao que permite calcular o d
 double calculaD(){
 
 	double u =(double) (rand() + 1) / (RAND_MAX + 1.0);
@@ -28,18 +28,21 @@ double calculaD(){
 }
 
 // Funcao que permite mapear os valores c entrada vem entre ]0,MAX_ATRASO[ e saida [0 HIST_SIZE]
-int map(double c_to_map){
-
-	printf("%lf -> %d \n", c_to_map,(int)floor(0 + ((HIST_SIZE - 0) / (MAX_ATRASO - 0)) * (c_to_map - 0)));
-
-	return (int)floor( 0 + ((HIST_SIZE - 0) / (MAX_ATRASO - 0)) * (c_to_map - 0));
+int map(double c_to_map, double max_atraso){
+	// printf("%lf -> %d \n", c_to_map,(int)floor(0 + ((HIST_SIZE - 0) / (MAX_ATRASO - 0)) * (c_to_map - 0)));
+	if (c_to_map<max_atraso)
+	{
+		return (int)floor( 0 + ((HIST_SIZE - 0) / (max_atraso - 0)) * (c_to_map - 0));
+	}else
+		return HIST_SIZE-1;
+	
 }
 int hardenMap(double c_to_map){
 
 	for (size_t i = 0; i < HIST_SIZE-1; i++) {
-		if (i==1) {
-			printf("%lf >= %lf &&  %lf < %lf\n",c_to_map,i*DELTA,c_to_map,(i+1)*DELTA);
-		}
+		// if (i==1) {
+		// 	printf("%lf >= %lf &&  %lf < %lf\n",c_to_map,i*DELTA,c_to_map,(i+1)*DELTA);
+		// }
 
 		if (c_to_map>=i*DELTA && c_to_map < (i+1)*DELTA)
 			return i;
